@@ -1,0 +1,23 @@
+{% extends "base.tpl.html" %}
+
+{% block content %}
+<div class="hero">
+    <h1>Web Templating</h1>
+    <p class="subtitle">
+        A framework-agnostic environment for designing web UI as HTML/CSS mockups.
+        Discuss page specs in <code>docs/plans/</code>, build components in
+        <code>src/components/</code>, and export them to <code>dist/</code> for
+        consumption by your real application.
+    </p>
+</div>
+
+<div class="demo-section">
+    <h2>Pages</h2>
+    <p>Mockup pages rendered by the dev server. Add yours to
+        <code>src/pages/</code> and link them here.</p>
+    <ul>
+        <li><a href="/page/demo">Demo</a> &mdash; worked example of the plan
+            &rarr; build &rarr; preview pipeline</li>
+    </ul>
+</div>
+{% endblock %}
