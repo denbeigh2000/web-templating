@@ -1,0 +1,82 @@
+/* person-card — one person's identity + availability.
+   Consumes semantic tokens from tokens.css only. */
+
+.person-card {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.person-card__avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-full);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    user-select: none;
+}
+
+.person-card__body {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.person-card__name {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.person-card__role {
+    margin: var(--space-xs) 0 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.person-card__status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* Decorative dot — the status word carries the meaning, never the colour. */
+.person-card__status::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+    background: var(--text-muted);
+}
+
+.person-card__status--available::before {
+    background: var(--accent);
+}
+
+.person-card__status--busy::before {
+    background: var(--danger);
+}

@@ -1,0 +1,32 @@
+/* card-grid — responsive auto-fill grid + designed empty state.
+   Consumes semantic tokens from tokens.css only. */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.card-grid__empty {
+    padding: var(--space-xl) var(--space-lg);
+    background: var(--surface-sunken);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.card-grid__empty-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text);
+}
+
+.card-grid__empty-hint {
+    margin: var(--space-sm) 0 0;
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+}

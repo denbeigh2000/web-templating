@@ -1,0 +1,73 @@
+{% extends "base.tpl.html" %}
+
+{% block styles %}
+    {{ includeCSS("tokens") }}
+    {{ includeCSS("mockup") }}
+    {{ includeCSS("components/person-card/person-card") }}
+    {{ includeCSS("components/card-grid/card-grid") }}
+{% endblock %}
+
+{% block content %}
+{% set available = "available" %}
+{% set busy = "busy" %}
+{% set away = "away" %}
+
+{# State variants via query string (server convention): ?variant=empty, ?variant=edge #}
+{% if query.variant == "empty" %}
+    {% set people = [] %}
+{% elif query.variant == "edge" %}
+    {% set people = [
+        { name: "Bartholomew Montgomery-Featherstonehaugh III", role: "Senior Principal Staff Software Engineer II, Platform Infrastructure Group", initials: "BM", status: busy },
+        { name: "Ada Lovelace", role: "Engineering Lead", initials: "AL", status: available },
+        { name: "Grace Hopper", role: "Platform Engineer", initials: "GH", status: busy }
+    ] %}
+{% else %}
+    {% set people = [
+        { name: "Ada Lovelace", role: "Engineering Lead", initials: "AL", status: available },
+        { name: "Grace Hopper", role: "Platform Engineer", initials: "GH", status: busy },
+        { name: "Alan Turing", role: "Research Scientist", initials: "AT", status: away },
+        { name: "Katherine Johnson", role: "Data Analyst", initials: "KJ" },
+        { name: "Margaret Hamilton", role: "Software Engineer", initials: "MH", status: available },
+        { name: "Radia Perlman", role: "Network Architect", initials: "RP", status: busy }
+    ] %}
+{% endif %}
+
+<div class="theme-default">
+    <h1>Team directory</h1>
+    <p>
+        Worked example of the plan &rarr; build &rarr; preview pipeline
+        (spec: <code>examples/mini-demo.md</code>). States: <a href="/page/demo">default</a>,
+        <a href="/page/demo?variant=empty">empty</a>,
+        <a href="/page/demo?variant=edge">long names</a>.
+    </p>
+
+    <h2>People</h2>
+    {{ includeComponent("card-grid", {
+        people: people,
+        emptyTitle: "No one here yet",
+        emptyHint: "The directory fills in as people join the team."
+    }) }}
+
+    {# Static reference renders of the component states — inert, so the
+       duplicates never take keyboard focus. #}
+    <div class="mockup-variants" inert>
+        <h2>Person card states</h2>
+        <p class="mockup-variants__intro">Static reference renders of every
+            person-card state; not part of the page UI.</p>
+        <div class="mockup-variants__grid">
+            {% for state in [
+                { label: "Available", person: { name: "Ada Lovelace", role: "Engineering Lead", initials: "AL", status: available } },
+                { label: "Busy", person: { name: "Grace Hopper", role: "Platform Engineer", initials: "GH", status: busy } },
+                { label: "Away", person: { name: "Alan Turing", role: "Research Scientist", initials: "AT", status: away } },
+                { label: "No status", person: { name: "Katherine Johnson", role: "Data Analyst", initials: "KJ" } },
+                { label: "Long content", person: { name: "Bartholomew Montgomery-Featherstonehaugh III", role: "Senior Principal Staff Software Engineer II, Platform Infrastructure Group", initials: "BM" } }
+            ] %}
+            <div class="mockup-variants__item">
+                <h3>{{ state.label }}</h3>
+                {{ includeComponent("person-card", { person: state.person }) }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

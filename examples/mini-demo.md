@@ -1,10 +1,10 @@
 # Mini Demo — Team Directory
 
-> Status: **agreed** — this spec is the single source of truth for the demo
-> page; deviations get reflected here first. It is a worked example of the
-> plan format: a short, deliberately trivial spec that shows the full plan
-> → build → preview → export pipeline. Delete `examples/` once your first
-> real plan lands, or keep it as reference.
+> Status: **implemented** — the mockup in `src/pages/demo.tpl.html` matches
+> this spec. This document is a worked example of the plan format: a short,
+> deliberately trivial spec that shows the full plan → build → preview →
+> export pipeline. Delete `examples/` once your first real plan lands, or
+> keep it as reference.
 
 ## Summary
 

@@ -1,0 +1,14 @@
+{# card-grid: responsive grid of person-cards + empty state.
+   Expects `people` (array for person-card), `emptyTitle`, `emptyHint`. #}
+{% if people.length %}
+<ul class="card-grid" role="list">
+    {% for person in people %}
+    <li>{{ includeComponent("person-card", { person: person }) }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<div class="card-grid__empty">
+    <p class="card-grid__empty-title">{{ emptyTitle }}</p>
+    <p class="card-grid__empty-hint">{{ emptyHint }}</p>
+</div>
+{% endif %}

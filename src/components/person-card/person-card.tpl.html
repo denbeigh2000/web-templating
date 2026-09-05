@@ -1,0 +1,12 @@
+{# person-card: identity + availability. Expects `person`:
+   { name, role, initials, status? (available | busy | away) } #}
+<article class="person-card">
+    <div class="person-card__avatar" aria-hidden="true">{{ person.initials }}</div>
+    <div class="person-card__body">
+        <h3 class="person-card__name" title="{{ person.name }}">{{ person.name }}</h3>
+        <p class="person-card__role" title="{{ person.role }}">{{ person.role }}</p>
+    </div>
+    {% if person.status %}
+    <span class="person-card__status person-card__status--{{ person.status }}">{{ person.status }}</span>
+    {% endif %}
+</article>
