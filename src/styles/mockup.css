@@ -1,0 +1,102 @@
+/* ============================================================
+   Web Templating — mockup-site chrome shared by pages that need
+   it. (Skip link, focus rings, the state-variants appendix, and
+   a popover force-show helper for static appendix renders.)
+
+   Component-specific styles live in each component's own CSS
+   file; page themes live in src/styles/tokens.css.
+   ============================================================ */
+
+/* ---- Focus visibility (both themes) ---- */
+.theme-default :focus-visible {
+ outline: 2px solid var(--accent-secondary);
+ outline-offset: 2px;
+ border-radius: var(--radius-sm);
+}
+
+/* ---- Skip link ---- */
+.skip-link {
+ position: absolute;
+ top: -100%;
+ left: var(--space-md);
+ z-index: 999;
+ padding: var(--space-sm) var(--space-md);
+ background: var(--surface-raised);
+ border: 1px solid var(--border-strong);
+ border-radius: var(--radius-md);
+ color: var(--text);
+ text-decoration: none;
+}
+
+.skip-link:focus {
+ top: var(--space-sm);
+}
+
+/* ---- Mockup state-variants appendix ----
+   Static reference renders of component states. Not part of the
+   page's real UI; the container is `inert` so keyboard focus stays
+   out of the duplicates. */
+.mockup-variants {
+ margin-top: var(--space-2xl);
+ padding-top: var(--space-lg);
+ border-top: 1px dashed var(--border-strong);
+}
+
+.mockup-variants__intro {
+ color: var(--text-muted);
+ font-size: var(--font-size-sm);
+ margin: var(--space-xs) 0 var(--space-lg);
+}
+
+.mockup-variants__grid {
+ display: grid;
+ gap: var(--space-md);
+ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.mockup-variants__item {
+ background: var(--surface-sunken);
+ border: 1px dashed var(--border-strong);
+ border-radius: var(--radius-md);
+ padding: var(--space-md);
+}
+
+.mockup-variants__item > h3 {
+ font-size: var(--font-size-xs);
+ font-weight: 600;
+ text-transform: uppercase;
+ letter-spacing: 0.06em;
+ color: var(--text-muted);
+ margin-bottom: var(--space-sm);
+}
+
+.mockup-variants__item--wide {
+ grid-column: 1 / -1;
+}
+
+.mockup-variants__hint {
+ margin-top: var(--space-sm);
+ font-size: var(--font-size-xs);
+ color: var(--text-muted);
+}
+
+.mockup-variants__spacing {
+ margin-top: var(--space-md);
+}
+
+/* ---- Static popover renders ----
+   Appendix copies of popover-bearing components are inert, so their
+   popovers can't be opened interactively. Wrapping a render in
+   .mockup-show-popover forces the popover visible as ordinary flow
+   content (author CSS overrides the UA's [popover] display:none). */
+.mockup-show-popover [popover] {
+ display: block;
+ position: static;
+ width: auto;
+ max-width: 26rem;
+ margin: var(--space-sm) 0 0;
+}
+
+.mockup-show-popover [popover]::backdrop {
+ display: none;
+}
