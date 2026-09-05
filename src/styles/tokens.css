@@ -1,0 +1,109 @@
+/* ============================================================
+   Web Templating — default design tokens (neutral slate + blue)
+   ============================================================
+   Token strategy:
+
+   - Tokens are declared in OKLCH as light/dark pairs via
+     light-dark(). "System" theme is the default (the element
+     carries `color-scheme: light dark`, below). Explicit themes
+     are a single decision, not a token re-map:
+       html { color-scheme: light }  →  force light
+       html { color-scheme: dark }   →  force dark
+     i.e. a `data-theme` attribute in the target app needs one
+     rule; "system" simply removes it. No JS in the mockup.
+
+   - Components consume ONLY the semantic layer (--surface,
+     --text, --accent, …). Never raw palette values.
+   - Hover/pressed/disabled variants are derived with
+     color-mix() rather than hand-authored.
+   - This layer is self-contained (spacing/radius/typography
+     included) so components + tokens can be exported as a unit.
+
+   Pages opt into these tokens by wrapping their content in
+   `.theme-default` (mirroring how a repo might carry a
+   `.theme-<other>` alternative later).
+   ============================================================ */
+
+.theme-default {
+ color-scheme: light dark;
+
+ /* Apply the semantic layer to the whole subtree — without this, text
+     inherits the scaffold's body colour in both themes. */
+ color: var(--text);
+ background-color: var(--surface);
+
+ /* ---- Semantic: surfaces (neutral slate/grey) ---- */
+ --surface: light-dark(oklch(0.98 0.005 250), oklch(0.21 0.012 255));
+ --surface-raised: light-dark(oklch(0.995 0.003 250), oklch(0.26 0.014 255));
+ --surface-sunken: light-dark(oklch(0.95 0.008 250), oklch(0.17 0.01 255));
+
+ /* ---- Semantic: text ---- */
+ --text: light-dark(oklch(0.27 0.02 255), oklch(0.92 0.008 255));
+ --text-muted: light-dark(oklch(0.5 0.015 255), oklch(0.72 0.01 255));
+
+ /* ---- Semantic: lines (low-contrast-but-visible) ---- */
+ --border: light-dark(oklch(0.9 0.008 250), oklch(0.36 0.01 255));
+ --border-strong: light-dark(oklch(0.78 0.01 250), oklch(0.46 0.012 255));
+
+ /* ---- Semantic: accents (blue primary, amber secondary) ---- */
+ --accent: light-dark(oklch(0.55 0.16 255), oklch(0.7 0.13 255));
+ --accent-ink: light-dark(oklch(0.99 0.005 250), oklch(0.17 0.02 255));
+ --accent-soft: light-dark(oklch(0.93 0.04 255), oklch(0.32 0.06 255));
+
+ --accent-secondary: light-dark(oklch(0.68 0.13 70), oklch(0.8 0.11 80));
+ --accent-secondary-ink: light-dark(oklch(0.2 0.02 70), oklch(0.2 0.02 80));
+ --accent-secondary-soft: light-dark(
+  oklch(0.94 0.04 85),
+  oklch(0.3 0.05 80)
+ );
+
+ --danger: light-dark(oklch(0.55 0.19 25), oklch(0.7 0.15 25));
+
+ /* ---- Derived states (color-mix, never hand-authored) ---- */
+ --accent-hover: color-mix(in oklab, var(--accent), black 10%);
+ --accent-active: color-mix(in oklab, var(--accent), black 20%);
+ --surface-hover: color-mix(in oklab, var(--surface-raised), var(--text) 4%);
+ --focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent-secondary);
+
+ /* ---- Typography ---- */
+ --font-sans:
+  system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+ --font-serif:
+  "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman",
+  serif;
+ --font-mono:
+  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+ --font-size-xs: 0.75rem;
+ --font-size-sm: 0.875rem;
+ --font-size-base: 1rem;
+ --font-size-lg: 1.125rem;
+ --font-size-xl: 1.25rem;
+ --font-size-2xl: 1.5rem;
+ --font-size-3xl: 2rem;
+
+ /* ---- Spacing scale ---- */
+ --space-xs: 0.25rem;
+ --space-sm: 0.5rem;
+ --space-md: 1rem;
+ --space-lg: 1.5rem;
+ --space-xl: 2rem;
+ --space-2xl: 3rem;
+ --space-3xl: 4rem;
+
+ /* ---- Shape ---- */
+ --radius-sm: 0.375rem;
+ --radius-md: 0.5rem;
+ --radius-lg: 0.75rem;
+ --radius-full: 9999px;
+}
+
+/* prefers-contrast: more — bump lines one step, both themes.
+   No separate palette required. */
+@media (prefers-contrast: more) {
+ .theme-default {
+  --border: light-dark(oklch(0.55 0.012 255), oklch(0.58 0.01 255));
+  --border-strong: light-dark(oklch(0.45 0.015 255), oklch(0.62 0.012 255));
+  --text-muted: light-dark(oklch(0.38 0.018 255), oklch(0.82 0.01 255));
+ }
+}
