@@ -45,11 +45,15 @@ env.addGlobal("includeComponent", (name, context) => {
 });
 
 env.addGlobal("includeCSS", (name) => {
-  return `<link rel="stylesheet" href="/css/${name}.css">`;
+  // SafeString: emitted markup is trusted template output, must not be escaped
+  return new nunjucks.runtime.SafeString(
+    `<link rel="stylesheet" href="/css/${name}.css">`,
+  );
 });
 
 env.addGlobal("includeJS", (name) => {
-  return `<script src="/js/${name}.js"></script>`;
+  // SafeString: emitted markup is trusted template output, must not be escaped
+  return new nunjucks.runtime.SafeString(`<script src="/js/${name}.js"></script>`);
 });
 
 // Serve static files from public/ directory
