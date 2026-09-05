@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/server/index.js",
     "start": "node src/server/index.js",
-    "build": "node src/build.js"
+    "build": "node src/build.js",
+    "check": "node tools/check-tokens.js"
   },
   "license": "MIT",
   "dependencies": {
