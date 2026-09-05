@@ -1,0 +1,19 @@
+{
+  "name": "web-templating",
+  "version": "0.1.0",
+  "description": "Framework-agnostic HTML/CSS mockup environment with reusable components and Nunjucks templating",
+  "main": "src/server/index.js",
+  "scripts": {
+    "dev": "nodemon src/server/index.js",
+    "start": "node src/server/index.js",
+    "build": "node src/build.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
