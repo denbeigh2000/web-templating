@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ title }} - Web Templating</title>
+        <link rel="stylesheet" href="/css/main.css" />
+        {% block styles %}{% endblock %}
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <header class="site-header">
+            <nav class="container">
+                <a href="/" class="logo">Web Templating</a>
+                <ul class="nav">
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main id="main" class="container">{% block content %}{% endblock %}</main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>&copy; {{ year }} Web Templating</p>
+            </div>
+        </footer>
+
+        <script src="/js/main.js"></script>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>
